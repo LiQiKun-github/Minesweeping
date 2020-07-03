@@ -10,7 +10,21 @@
   <head>
     <title>扫雷小游戏</title>
   </head>
+  <style>
+    body {
+      text-align: center;
+      position: relative;
+    }
+    .choice-level{
+      color:blue;
+    }
+  </style>
   <body>
-  $END$
+  <div class="level">
+    <button type="button" name="button" class="choice-level">5x5</button>
+    <button type="button" name="button" class="choice-level">10x10</button>
+    <button type="button" name="button" class="choice-level">20x20</button>
+    <button type="button" name="button" class="restart">重新开始</button>
+  </div>
   </body>
 </html>
