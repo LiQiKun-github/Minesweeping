@@ -50,6 +50,10 @@ Mine.prototype.init=function () {
             }
         }
     }
+
+    this.parent.oncontextmenu=function () {
+        return false;
+    }
     this.Plusone();
     this.createDom();
     //console.log(this.squares);
@@ -124,25 +128,45 @@ Mine.prototype.createDom=function () {
     var table=document.createElement('table');
     var domTr;
     var domTd;
+    var This=this;
     for(var i=0;i<this.tr;i++){
         domTr=document.createElement('tr');//这个地方一定要注意createElement（）每次循环都得执行一次，不然的话放不进去。。。。。。。（这个地方老坑了，测试好多次）
         this.tds[i]=[];
         for(var j=0;j<this.td;j++){
             domTd=document.createElement('td');
-            //domTd.innerHTML=0;
-            domTr.appendChild(domTd);
             this.tds[i][j]=domTd;
-            if(this.squares[i][j].type=='mine'){
+            domTd.pos=[i,j];//把格子对应的行与列存在格子上。
+            domTd.onmousedown=function () {
+                This.play(event,this);//This指的是实例对象，this代表td；
+            };
+            //domTd.innerHTML=0;
+
+            /*domTd.oncontextmenu=function () {
+                return false;
+            }*/
+            domTr.appendChild(domTd);
+
+            /*if(this.squares[i][j].type=='mine'){
                 domTd.className='mine';//把雷的图片放上
             }
             if(this.squares[i][j].type=='number'){
                 domTd.innerHTML=this.squares[i][j].value;//把数字放上
-            }
+            }*/
         }
         table.appendChild(domTr);
     }
     this.parent.appendChild(table);
 }
+Mine.prototype.play=function (ev,obj) {
+    if(ev.which==1){
+        //左键
+        console.log(obj);
+    }
+}
+
+
+
+
 
 
 var mine=new Mine(28,28,99);
