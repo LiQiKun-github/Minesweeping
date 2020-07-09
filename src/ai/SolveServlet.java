@@ -32,7 +32,7 @@ public class SolveServlet extends javax.servlet.http.HttpServlet {
         int a;
         a = Integer.parseInt(req.getParameter("1"));
         String hangnum="6",lienum="6";
-        System.out.print(a);
+        //System.out.print(a);
         if(16==a){
             hangnum="16";lienum="16";
         }
@@ -54,7 +54,7 @@ public class SolveServlet extends javax.servlet.http.HttpServlet {
         long end=System.currentTimeMillis();
         req.getSession().setAttribute("elapse", (end-start)/1000.0);
 
-        System.out.print("OK11!");
+        //System.out.print("OK11!");
         //PrintWriter out = resp.getWriter();
         //out.println("<p>"+"hello"+"</p>");
         resp.sendRedirect("index.jsp");
