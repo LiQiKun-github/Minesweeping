@@ -33,7 +33,7 @@ td{
     border-color: #fff #a1a1a1 #a1a1a1;
     text-align: center;
     line-height: 20px;
-    font-weight: bold;/////加粗
+    font-weight: bold;
 }
 
 
@@ -41,3 +41,19 @@ td{
     margin-top: 10px;
     text-align: center;
 }
+
+
+.mine{
+    background: blue url(mine.gif) no-repeat center;
+    background-size: cover;
+}
+
+.flag{
+    background:red url(flag.gif);
+    background-size: cover;
+}
+
+
+
+
+

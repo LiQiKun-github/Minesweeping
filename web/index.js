@@ -25,6 +25,7 @@ Mine.prototype.randomNum=function () {
 
 Mine.prototype.init=function () {
     //this.randomNum();
+
     var rn=this.randomNum();
     var n=0;
     for(var i=0;i<this.tr;i++){
@@ -47,18 +48,74 @@ Mine.prototype.init=function () {
                     value:0
                 };
             }
-
-
-
         }
     }
-    //console.log(this.squares);
-
+    this.Plusone();
     this.createDom();
+    //console.log(this.squares);
 }
 
+///方法太粗暴放弃。。。。。。。。。
+/*Mine.prototype.plusone=function () {
+   or(var i=1;i<this.tr-1;i++){
+       for(var j=1;j<this.tr-1;j++){
+           if(this.squares[i][j].type=='mine'){
+                   if(this.squares[i-1][j-1].type!='mine')this.squares[i-1][j-1].value++;
+                   if(this.squares[i-1][j].type!='mine')this.squares[i-1][j].value++;
+                   if(this.squares[i-1][j+1].type!='mine')this.squares[i-1][j+1].value++;
+                   if(this.squares[i][j-1].type!='mine')this.squares[i][j-1].value++;
+                   if(this.squares[i][j+1].type!='mine')this.squares[i][j+1].value++;
+                   if(this.squares[i+1][j-1].type!='mine')this.squares[i+1][j-1].value++;
+                   if(this.squares[i+1][j].type!='mine')this.squares[i+1][j].value++;
+                   if(this.squares[i+1][j+1].type!='mine')this.squares[i+1][j+1].value++;
+           }
+       }
+   }
+   for(var i=1;i<this.tr-1;i++){
+       if(this.squares[i][0].type=='mine'){
+           if(this.squares[i-1][j-1].type!='mine')this.squares[i-1][j-1].value++;
+           if(this.squares[i-1][j-1].type!='mine')this.squares[i-1][j-1].value++;
+           if(this.squares[i-1][j-1].type!='mine')this.squares[i-1][j-1].value++;
+           if(this.squares[i-1][j-1].type!='mine')this.squares[i-1][j-1].value++;
+           if(this.squares[i-1][j-1].type!='mine')this.squares[i-1][j-1].value++;
+       }
+   }
+}*/
 
 
+//
+Mine.prototype.find=function (square) {
+    var x=square.x;
+    var y=square.y;
+    var result=[];
+
+    for(var i=x-1;i<=x+1;i++){
+        for(var j=y-1;j<=y+1;j++){
+            if(i<0||j<0||i>this.td-1||j>this.tr-1||(i==x&&j==x)||this.squares[j][i].type=='mine'){
+                continue;
+            }
+            result.push([j,i]);
+        }
+    }
+    return result;
+}
+
+Mine.prototype.Plusone=function () {
+
+    for(var i=0;i<this.tr;i++){
+
+        for(var j=0;j<this.td;j++){
+
+            if(this.squares[i][j].type=='number'){
+                continue;
+            }
+            var f=this.find(this.squares[i][j]);//初始化的位置。。。。。
+            for(var k=0;k<f.length;k++){
+                this.squares[f[k][0]][f[k][1]].value++;
+            }
+        }
+    }
+}
 
 
 
@@ -74,7 +131,13 @@ Mine.prototype.createDom=function () {
             domTd=document.createElement('td');
             //domTd.innerHTML=0;
             domTr.appendChild(domTd);
-
+            this.tds[i][j]=domTd;
+            if(this.squares[i][j].type=='mine'){
+                domTd.className='mine';//把雷的图片放上
+            }
+            if(this.squares[i][j].type=='number'){
+                domTd.innerHTML=this.squares[i][j].value;//把数字放上
+            }
         }
         table.appendChild(domTr);
     }
@@ -85,3 +148,4 @@ Mine.prototype.createDom=function () {
 var mine=new Mine(28,28,99);
 
 mine.init();
+//console.log(mine.find(mine.squares[1][1]));
