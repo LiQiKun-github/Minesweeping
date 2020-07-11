@@ -7,6 +7,7 @@ function  Mine(tr,td,mineNum) {
     this.tds=[];
     this.surplusMine=mineNum;
     this.allRight=false;
+    this.Success=0;
 
     this.parent=document.querySelector('.gameBox');
     this.mineNums=document.querySelector('.mineNum');//表示剩余雷数
@@ -26,7 +27,6 @@ Mine.prototype.randomNum=function () {
 
 Mine.prototype.init=function () {
     //this.randomNum();
-
     var rn=this.randomNum();
     var n=0;
     for(var i=0;i<this.tr;i++){
@@ -226,8 +226,10 @@ Mine.prototype.play=function (ev,obj) {
 
         if(this.squares[obj.pos[0]][obj.pos[1]].type=='mine'){//判断右击的之下是不是雷
             this.allRight=true;
+            this.Success++;
         }else{
             this.allRight=false;
+            this.Success--;
         }
         if(obj.className=='flag'){
             this.mineNums.innerHTML=--this.surplusMine;
@@ -243,7 +245,7 @@ Mine.prototype.play=function (ev,obj) {
                 }
             }
             */
-            if(this.allRight==true){
+            if(this.Success==this.mineNum){
                 alert("成功");
 
             }else {
