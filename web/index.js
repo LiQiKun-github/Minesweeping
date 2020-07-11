@@ -9,6 +9,7 @@ function  Mine(tr,td,mineNum) {
     this.allRight=false;
 
     this.parent=document.querySelector('.gameBox');
+    this.mineNums=document.querySelector('.mineNum');//表示剩余雷数
 
 }
 //生成n个不重复的数字
@@ -56,8 +57,8 @@ Mine.prototype.init=function () {
     }
     this.Plusone();
     this.createDom();
-    /*this.mineNums=document.querySelector('.mineNum');
-    this.mineNums.innerHTML=this.mineNum;*/
+
+    this.mineNums.innerHTML=this.surplusMine;//显示剩余雷数
     //console.log(this.squares);
 }
 
@@ -116,7 +117,6 @@ Mine.prototype.Plusone=function () {
                 continue;
             }
             var f=this.find(this.squares[i][j]);//初始化的位置。。。。。
-            console.log(f);
             for(var k=0;k<f.length;k++){
                 this.squares[f[k][0]][f[k][1]].value++;
             }
@@ -214,7 +214,40 @@ Mine.prototype.play=function (ev,obj) {
 
     }
     if(ev.which==3){
-        console.log("ok!");
+        //console.log("ok!");
+        if(obj.className&&obj.className!='flag'){
+            return
+        }
+        obj.className=obj.className=='flag' ? '' : 'flag';
+
+        if(this.squares[obj.pos[0]][obj.pos[1]].type=='mine'){//判断右击的之下是不是雷
+            this.allRight=true;
+        }else{
+            this.allRight=false;
+        }
+        if(obj.className=='flag'){
+            this.mineNums.innerHTML=--this.surplusMine;
+        }else {
+            this.mineNums.innerHTML=++this.surplusMine;
+        }
+
+        if(this.surplusMine==0){
+            /*
+            for(var i=0;i<this.tr;i++){
+                for(var j=0;j<this.td;j++){
+
+                }
+            }
+            */
+            if(this.allRight==true){
+                alert("成功");
+
+            }else {
+                alert("失败");
+                this.gameOver();
+            }
+
+        }
 
     }
     /*
@@ -245,7 +278,7 @@ Mine.prototype.gameOver=function (obj) {
 
 
 
-var mine=new Mine(28,28,99);
+var mine=new Mine(5,5,5);
 
 mine.init();
 //console.log(mine.find(mine.squares[1][1]));

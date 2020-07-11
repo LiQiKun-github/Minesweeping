@@ -23,38 +23,9 @@
         <div class="gameBox">
 
         </div>
-        <div class="info">剩余雷数：<span class="=mineNum"></span></div>
+        <div class="info">剩余雷数：<span class="mineNum"></span></div>
     </div>
+
 <script src="index.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </body>
 </html>
