@@ -49,7 +49,7 @@ td{
 }
 
 .flag{
-    background:red url(flag.gif);
+    background:red url(flag.gif) no-repeat center;
     background-size: cover;
 }
 

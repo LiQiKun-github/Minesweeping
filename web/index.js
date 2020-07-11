@@ -286,7 +286,7 @@ Mine.prototype.gameOver=function (obj) {
 var btns=document.querySelectorAll('.level button');
 var mine =null;
 var ln=0;
-var arr=[[9,9,10],[16,16,4.],[28,28,99]];//难度级别
+var arr=[[9,9,10],[16,16,40],[28,28,99]];//难度级别
 
 for(let i=0;i<btns.length-1;i++){
     btns[i].onclick=function () {
@@ -299,9 +299,13 @@ for(let i=0;i<btns.length-1;i++){
 }
 btns[0].onclick();//初始化
 
-btns[3].onclick()=function () {
+btns[3].onclick=function () {
+    //alert("bug");
     mine.init();
 }
+
+
+
 /*
 var mine=new Mine(5,5,5);
 
