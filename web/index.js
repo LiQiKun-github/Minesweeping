@@ -162,8 +162,9 @@ Mine.prototype.createDom=function () {
 }
 Mine.prototype.play=function (ev,obj) {
     var This=this;
-    if(ev.which==1){
+    if(ev.which==1&&obj.className!='flag'){
         //左键
+
         var squ=this.squares[obj.pos[0]][obj.pos[1]];
         //console.log(squ);
         var NumClass=['zero','one','two','three','four','five','six','seven','eight','nine','ten'];
