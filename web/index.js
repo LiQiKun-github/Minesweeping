@@ -19,7 +19,7 @@ Mine.prototype.randomNum=function () {
     }
     square.sort(function () {return 0.5-Math.random()});//这种随机排序比较高级。。。
     //console.log(square);
-    return square.slice(0,this.mineNum)
+    return square.slice(0,this.mineNum);
 }
 
 
@@ -56,6 +56,8 @@ Mine.prototype.init=function () {
     }
     this.Plusone();
     this.createDom();
+    /*this.mineNums=document.querySelector('.mineNum');
+    this.mineNums.innerHTML=this.mineNum;*/
     //console.log(this.squares);
 }
 
@@ -95,7 +97,7 @@ Mine.prototype.find=function (square) {
 
     for(var i=x-1;i<=x+1;i++){
         for(var j=y-1;j<=y+1;j++){
-            if(i<0||j<0||i>this.td-1||j>this.tr-1||(i==x&&j==x)||this.squares[j][i].type=='mine'){
+            if(i<0||j<0||i>this.td-1||j>this.tr-1||(i==x&&j==y)||this.squares[j][i].type=='mine'){
                 continue;
             }
             result.push([j,i]);
@@ -114,6 +116,7 @@ Mine.prototype.Plusone=function () {
                 continue;
             }
             var f=this.find(this.squares[i][j]);//初始化的位置。。。。。
+            console.log(f);
             for(var k=0;k<f.length;k++){
                 this.squares[f[k][0]][f[k][1]].value++;
             }
@@ -158,13 +161,86 @@ Mine.prototype.createDom=function () {
     this.parent.appendChild(table);
 }
 Mine.prototype.play=function (ev,obj) {
+    var This=this;
     if(ev.which==1){
         //左键
-        console.log(obj);
+        var squ=this.squares[obj.pos[0]][obj.pos[1]];
+        //console.log(squ);
+        var NumClass=['zero','one','two','three','four','five','six','seven','eight','nine','ten'];
+
+
+
+
+        if(squ.type=="number"){
+            obj.innerHTML=squ.value;
+            obj.className=NumClass[squ.value];
+
+            if(squ.value==0){
+                obj.innerHTML='';
+                //obj.className=NumClass[squ.value];
+
+                function  DisappearZero(square) {
+                    var g=This.find(square);
+                    for(var i=0;i<g.length;i++){
+                        var n=g[i][0];
+                        var m=g[i][1];
+                        This.tds[n][m].className=NumClass[This.squares[n][m].value];
+                        if(This.squares[n][m].value==0){
+                            //
+                            if(!This.tds[n][m].check){
+                                This.tds[n][m].check=true;
+                                DisappearZero(This.squares[n][m]);
+                            }
+                        }
+                        else{
+                            This.tds[n][m].innerHTML=This.squares[n][m].value;
+                        }
+
+                    }
+
+                }
+                DisappearZero(squ);
+
+            }else{
+                //obj.innerHTML=squ.value;
+            }
+            //console.log("你点到数字了");
+        } else{
+            this.gameOver(obj);
+            //console.log("你点到雷了");
+        }
+
+
+
     }
+    if(ev.which==3){
+        console.log("ok!");
+
+    }
+    /*
+Mine.prototype.NumColor=function () {
+
+}
+*/
 }
 
 
+
+
+Mine.prototype.gameOver=function (obj) {
+    for(var i=0;i<this.tr;i++){
+        for(var j=0;j<this.td;j++){
+            if(this.squares[i][j].type=='mine'){
+                this.tds[i][j].className='mine';
+            }
+
+            this.tds[i][j].onmousedown=null;//失败后禁止点击
+        }
+    }
+    if(obj){
+        obj.style.backgroundColor='#f00';
+    }
+}
 
 
 

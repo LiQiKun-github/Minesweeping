@@ -53,6 +53,70 @@ td{
     background-size: cover;
 }
 
+td.zero{
+    border-color: #d9d9d9;
+    background: #d9d9d9;
+}
+
+td.one{
+    border-color: #d9d9d9;
+    background: #d9d9d9;
+    color:blue;
+}
+
+td.two{
+    border-color: #d9d9d9;
+    background: #d9d9d9;
+    color:blue;
+}
+
+td.three{
+    border-color: #d9d9d9;
+    background: #d9d9d9;
+    color:blue;
+}
+
+td.four{
+    border-color: #d9d9d9;
+    background: #d9d9d9;
+    color:blue;
+}
+
+td.five{
+    border-color: #d9d9d9;
+    background: #d9d9d9;
+    color:blue;
+}
+
+td.six{
+    border-color: #d9d9d9;
+    background: #d9d9d9;
+    color:blue;
+}
+
+td.seven{
+    border-color: #d9d9d9;
+    background: #d9d9d9;
+    color:blue;
+}
+
+td.eight{
+    border-color: #d9d9d9;
+    background: #d9d9d9;
+    color:blue;
+}
+
+td.nine{
+    border-color: #d9d9d9;
+    background: #d9d9d9;
+    color:blue;
+}
+
+td.ten{
+    border-color: #d9d9d9;
+    background: #d9d9d9;
+    color:blue;
+}
 
 
 
