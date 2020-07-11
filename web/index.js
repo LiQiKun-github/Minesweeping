@@ -158,13 +158,16 @@ Mine.prototype.createDom=function () {
         }
         table.appendChild(domTr);
     }
+    this.parent.innerHTML='';
     this.parent.appendChild(table);
 }
 Mine.prototype.play=function (ev,obj) {
     var This=this;
     if(ev.which==1&&obj.className!='flag'){
         //左键
-
+        obj.oncontextmenu=function () {
+            return false;
+        }
         var squ=this.squares[obj.pos[0]][obj.pos[1]];
         //console.log(squ);
         var NumClass=['zero','one','two','three','four','five','six','seven','eight','nine','ten'];
@@ -278,8 +281,27 @@ Mine.prototype.gameOver=function (obj) {
 
 
 
+var btns=document.querySelectorAll('.level button');
+var mine =null;
+var ln=0;
+var arr=[[9,9,10],[16,16,4.],[28,28,99]];//难度级别
 
+for(let i=0;i<btns.length-1;i++){
+    btns[i].onclick=function () {
+        btns[ln].className='';
+        this.className='active';
+        mine=new Mine(arr[i][0],arr[i][1],arr[i][2]);
+        mine.init();
+        ln=i;
+    }
+}
+btns[0].onclick();//初始化
+
+btns[3].onclick()=function () {
+    mine.init();
+}
+/*
 var mine=new Mine(5,5,5);
 
-mine.init();
+mine.init();*/
 //console.log(mine.find(mine.squares[1][1]));
