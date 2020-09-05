@@ -35,8 +35,6 @@ td{
     line-height: 20px;
     font-weight: bold;
 }
-
-
 .info{
     margin-top: 10px;
     text-align: center;
@@ -73,7 +71,7 @@ td.two{
 td.three{
     border-color: #d9d9d9;
     background: #d9d9d9;
-    color: #fffc00;
+    color: black;
 }
 
 td.four{

@@ -57,7 +57,7 @@ Mine.prototype.init=function () {
     }
     this.Plusone();
     this.createDom();
-
+    this.Success=0;
     this.surplusMine=this.mineNum;
     this.mineNums.innerHTML=this.surplusMine;//显示剩余雷数
     //console.log(this.squares);
@@ -209,9 +209,9 @@ Mine.prototype.play=function (ev,obj) {
             }
             //console.log("你点到数字了");
         } else{
-            //alter("失败");
-            this.gameOver(obj);
+            alert("失败");
             //console.log("你点到雷了");
+            this.gameOver(obj);
         }
 
 
@@ -224,13 +224,17 @@ Mine.prototype.play=function (ev,obj) {
         }
         obj.className=obj.className=='flag' ? '' : 'flag';
 
-        if(this.squares[obj.pos[0]][obj.pos[1]].type=='mine'){//判断右击的之下是不是雷
+        /*if(this.squares[obj.pos[0]][obj.pos[1]].type=='mine'){//判断右击之下是不是雷
             this.allRight=true;
             this.Success++;
         }else{
             this.allRight=false;
             this.Success--;
-        }
+        }*/
+        if(obj.className=='flag'&&this.squares[obj.pos[0]][obj.pos[1]].type=='mine') this.Success++;
+        if(obj.className!='flag'&&this.squares[obj.pos[0]][obj.pos[1]].type=='mine') this.Success--;
+        //else this.Success--;
+        //console.log(this.Success);
         if(obj.className=='flag'){
             this.mineNums.innerHTML=--this.surplusMine;
         }else {
