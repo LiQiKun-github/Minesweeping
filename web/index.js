@@ -58,6 +58,7 @@ Mine.prototype.init=function () {
     this.Plusone();
     this.createDom();
 
+    this.surplusMine=this.mineNum;
     this.mineNums.innerHTML=this.surplusMine;//显示剩余雷数
     //console.log(this.squares);
 }
@@ -123,8 +124,6 @@ Mine.prototype.Plusone=function () {
         }
     }
 }
-
-
 
 
 Mine.prototype.createDom=function () {
@@ -210,6 +209,7 @@ Mine.prototype.play=function (ev,obj) {
             }
             //console.log("你点到数字了");
         } else{
+            //alter("失败");
             this.gameOver(obj);
             //console.log("你点到雷了");
         }
@@ -286,7 +286,7 @@ Mine.prototype.gameOver=function (obj) {
 var btns=document.querySelectorAll('.level button');
 var mine =null;
 var ln=0;
-var arr=[[9,9,10],[16,16,40],[28,28,99]];//难度级别
+var arr=[[9,9,10],[16,16,30],[28,28,99]];//难度级别
 
 for(let i=0;i<btns.length-1;i++){
     btns[i].onclick=function () {
