@@ -1,4 +1,5 @@
 function  Mine(tr,td,mineNum) {
+    //this.a;
     this.tr=tr;//行
     this.td=td;//列
     this.mineNum=mineNum;//雷的数量
@@ -55,6 +56,7 @@ Mine.prototype.init=function () {
     this.parent.oncontextmenu=function () {
         return false;
     }
+
     this.Plusone();
     this.createDom();
     this.Success=0;
@@ -90,8 +92,23 @@ Mine.prototype.init=function () {
    }
 }*/
 
+Mine.prototype.RemainNumber=function(){
+    //var sum=this.tr*this.td;
+    //console.log(sum);
+    this.a=this.td*this.tr;
+    for(var i=0;i<this.td;i++){
+        for(var j=0;j<this.tr;j++){
+            if(this.tds[i][j].className!=''&&this.tds[i][j].className!='flag')this.a--;
+        }
+    }
+    console.log(this.a);
+    if(this.a==this.mineNum){
+        alert("游戏胜利，你真是个小天才！")
+        this.gameOver();
+    }
 
-//
+}       
+
 Mine.prototype.find=function (square) {
     var x=square.x;
     var y=square.y;
@@ -170,10 +187,6 @@ Mine.prototype.play=function (ev,obj) {
         var squ=this.squares[obj.pos[0]][obj.pos[1]];
         //console.log(squ);
         var NumClass=['zero','one','two','three','four','five','six','seven','eight','nine','ten'];
-
-
-
-
         if(squ.type=="number"){
             obj.innerHTML=squ.value;
             obj.className=NumClass[squ.value];
@@ -190,6 +203,7 @@ Mine.prototype.play=function (ev,obj) {
                         This.tds[n][m].className=NumClass[This.squares[n][m].value];
                         if(This.squares[n][m].value==0){
                             //
+                            //this.a++;
                             if(!This.tds[n][m].check){
                                 This.tds[n][m].check=true;
                                 DisappearZero(This.squares[n][m]);
@@ -209,14 +223,16 @@ Mine.prototype.play=function (ev,obj) {
             }
             //console.log("你点到数字了");
         } else{
-            alert("失败");
+            alert("游戏失败，你点到雷了！");
             //console.log("你点到雷了");
             this.gameOver(obj);
         }
 
 
-
+            this.RemainNumber();
     }
+    //console.log(this.a);
+
     if(ev.which==3){
         //console.log("ok!");
         if(obj.className&&obj.className!='flag'){
@@ -224,17 +240,8 @@ Mine.prototype.play=function (ev,obj) {
         }
         obj.className=obj.className=='flag' ? '' : 'flag';
 
-        /*if(this.squares[obj.pos[0]][obj.pos[1]].type=='mine'){//判断右击之下是不是雷
-            this.allRight=true;
-            this.Success++;
-        }else{
-            this.allRight=false;
-            this.Success--;
-        }*/
         if(obj.className=='flag'&&this.squares[obj.pos[0]][obj.pos[1]].type=='mine') this.Success++;
         if(obj.className!='flag'&&this.squares[obj.pos[0]][obj.pos[1]].type=='mine') this.Success--;
-        //else this.Success--;
-        //console.log(this.Success);
         if(obj.className=='flag'){
             this.mineNums.innerHTML=--this.surplusMine;
         }else {
@@ -242,18 +249,11 @@ Mine.prototype.play=function (ev,obj) {
         }
 
         if(this.surplusMine==0){
-            /*
-            for(var i=0;i<this.tr;i++){
-                for(var j=0;j<this.td;j++){
-
-                }
-            }
-            */
             if(this.Success==this.mineNum){
-                alert("成功");
+                alert("游戏胜利，你真是个小天才！");
 
             }else {
-                alert("失败");
+                alert("游戏失败，再接再厉！");
                 this.gameOver();
             }
 
@@ -282,6 +282,7 @@ Mine.prototype.gameOver=function (obj) {
     }
     if(obj){
         obj.style.backgroundColor='#f00';
+        //console.log(obj.pos[0],obj.pos[1]);
     }
 }
 
