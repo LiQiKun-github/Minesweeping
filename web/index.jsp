@@ -12,7 +12,9 @@
 </head>
 <link rel="stylesheet" href="index.css">
 
-<body>
+<body style="background: url(dp.jpg); background-repeat:no-repeat ;
+background-size:100% 100%;
+background-attachment: fixed;" class="backg">
 <div id="mine">
     <div class="level">
         <button class="active">初级</button>

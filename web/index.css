@@ -6,7 +6,7 @@
     margin-bottom: 10px;
 }
 .level button{
-    padding: 5px 15px;
+    padding: 15px 15px;
     background: #02a4ad;
     border:none;
     color:#fff;
@@ -26,8 +26,8 @@ table{
 }
 td{
     padding:0;
-    width:20px;
-    height:20px;
+    width:25px;
+    height:25px;
     background: #ccc;
     border:2px solid;
     border-color: #fff #a1a1a1 #a1a1a1;
@@ -116,6 +116,10 @@ td.ten{
     color: #00ff6e;
 }
 
+.backg{
+    background-image: url(1.jpg);
+    background-repeat: repeat;
+}
 
 
 

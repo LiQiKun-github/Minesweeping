@@ -20,7 +20,7 @@ Mine.prototype.randomNum=function () {
     for(var i=0;i<square.length;i++){
         square[i]=i;
     }
-    square.sort(function () {return 0.5-Math.random()});//这种随机排序比较高级。。。
+    square.sort(function () {return 0.5-Math.random()});
     //console.log(square);
     return square.slice(0,this.mineNum);
 }
