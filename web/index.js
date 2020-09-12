@@ -251,7 +251,7 @@ Mine.prototype.play=function (ev,obj) {
         if(this.surplusMine==0){
             if(this.Success==this.mineNum){
                 alert("游戏胜利，你真是个小天才！");
-
+                this.gameOver();
             }else {
                 alert("游戏失败，再接再厉！");
                 this.gameOver();
@@ -276,8 +276,7 @@ Mine.prototype.gameOver=function (obj) {
             if(this.squares[i][j].type=='mine'){
                 this.tds[i][j].className='mine';
             }
-
-            this.tds[i][j].onmousedown=null;//失败后禁止点击
+            this.tds[i][j].onmousedown=null;//游戏结束后禁止点击
         }
     }
     if(obj){
